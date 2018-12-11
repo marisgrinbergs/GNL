@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_searchn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrinbe <magrinbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 18:05:04 by magrinbe          #+#    #+#             */
-/*   Updated: 2018/12/11 21:01:00 by magrinbe         ###   ########.fr       */
+/*   Created: 2018/12/11 20:01:38 by magrinbe          #+#    #+#             */
+/*   Updated: 2018/12/11 20:08:08 by magrinbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strmap(char const *s, char (*f)(char))
+int		ft_searchn(char *str)
 {
-	char	*str;
-	int		i;
+	int i;
 
-	if (!f || !s)
-		return (NULL);
 	i = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1));
-	if (!str)
-		return (NULL);
-	while (s[i])
-	{
-		str[i] = f(s[i]);
+	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if (str[i] == '\n')
+		return (-1);
+	return (0);
 }

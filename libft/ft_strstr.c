@@ -6,7 +6,7 @@
 /*   By: magrinbe <magrinbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:59:09 by magrinbe          #+#    #+#             */
-/*   Updated: 2018/11/22 19:24:33 by magrinbe         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:11:44 by magrinbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char			*ft_strstr(const char *str, const char *to_find)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != to_find[0] && str[i] != '\0')
 		i++;
 	if (ft_strcmp(to_find, "") == 0)
