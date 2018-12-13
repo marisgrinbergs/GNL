@@ -6,7 +6,7 @@
 /*   By: magrinbe <magrinbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 16:54:36 by magrinbe          #+#    #+#             */
-/*   Updated: 2018/12/11 21:04:47 by magrinbe         ###   ########.fr       */
+/*   Updated: 2018/12/13 21:50:59 by magrinbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,30 @@ int		ft_searchn(char *str)
 	return (0);
 }
 
-int			get_next_line(const int fd, char **line)
+int						get_next_line(const int fd, char **line)
 {
-	ssize_t		j;
-	static int	last;
-	static char	*buff = "";
-	char 		tmp[BUFF_SIZE + 1];
-	static int pos;
-	int			stop;
-	static int	start;
+	ssize_t				j;
+	static t_gnl_list	list;
 
-	stop = 0;
+	list.buff = "";
 	if (fd < 0 || fd > 4864)
 		return (-1);
-	while ((stop == 0) && (j = read(fd, tmp, BUFF_SIZE)) > 0)
+	while ((ft_searchn(list.tmp) == 0) &&
+	(j = read(fd, list.tmp, BUFF_SIZE)) > 0)
 	{
-		buff = ft_strjoin(buff, tmp);
-		if (ft_searchn(tmp) == -1)
-		{
-			stop = 1;
-		}
+		list.buff = ft_strjoin(list.buff, list.tmp);
+		ft_bzero(list.tmp, BUFF_SIZE);
 	}
-	while (buff[pos] && buff[pos] != '\n')
-		pos++;
-	*line = ft_strsub(buff, start, pos - start);
-	start = pos + 1;
-	pos++;
+	while (list.buff[list.pos] && list.buff[list.pos] != '\n')
+		list.pos++;
+	*line = ft_strsub(list.buff, list.start, list.pos - list.start);
+	list.start = list.pos + 1;
+	list.pos++;
 	if (j > 0)
 		return (1);
-	if (j == 0 && last == 0)
+	if (j == 0 && list.last == 0)
 	{
-		last = 1;
+		list.last = 1;
 		return (1);
 	}
 	if (j == -1)

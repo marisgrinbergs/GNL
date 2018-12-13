@@ -6,7 +6,7 @@
 /*   By: magrinbe <magrinbe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:27:10 by magrinbe          #+#    #+#             */
-/*   Updated: 2018/12/11 21:18:14 by magrinbe         ###   ########.fr       */
+/*   Updated: 2018/12/13 19:58:08 by magrinbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE 3
+# define BUFF_SIZE 16
+
+typedef struct		s_gnl_list
+{
+	int				last;
+	char			*buff;
+	char			tmp[BUFF_SIZE + 1];
+	int				pos;
+	int				start;
+}					t_gnl_list;
+
 int		get_next_line(const int fd, char **line);
 
 #endif
